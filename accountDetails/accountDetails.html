@@ -1,0 +1,44 @@
+<template>
+    <lightning-card variant="Narrow" title="Account Details" icon-name="standard:account">
+        <lightning-record-view-form record-id={recordId} object-api-name="Account" density="comfy">
+            <div class="slds-grid slds-wrap slds-var-p-around_x-small">
+                <template for:each={fieldList} for:item="field">
+                    <div key={field} class="slds-col slds-size_1-of-2">
+                        <lightning-output-field field-name={field}>
+                        </lightning-output-field>
+                    </div>
+                </template>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="form-element-01">Total Number of Contacts</label>
+                    <div class="slds-col slds-size_1-of-2 slds-form-element__control">
+                        {totalNumContacts}
+                    </div>
+                </div>
+            </div>
+
+        </lightning-record-view-form>
+
+        <lightning-card variant="Narrow" title={customerSuccessTitle} icon-name="standard:contact">
+            <template if:true={showCustomerSuccess}>
+                <lightning-datatable data={customerSuccessList} columns={columns} key-field="Id"
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+            <template if:false={showCustomerSuccess}>
+                <div class="slds-box slds-text-color_error slds-var-p-around_x-small slds-align_absolute-center">NO DATA
+                    FOUND</div>
+            </template>
+        </lightning-card>
+        <lightning-card variant="Narrow" title={applicationDeveloperTitle} icon-name="standard:contact">
+            <template if:true={showApplicationDeveloper}>
+                <lightning-datatable data={applicationDeveloperList} columns={columns} key-field="Id"
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+            <template if:false={showApplicationDeveloper}>
+                <div class="slds-box slds-text-color_error slds-var-p-around_x-small slds-align_absolute-center">NO DATA
+                    FOUND</div>
+            </template>
+        </lightning-card>
+    </lightning-card>
+</template>
